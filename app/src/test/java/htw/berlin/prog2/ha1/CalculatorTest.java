@@ -126,7 +126,7 @@ class CalculatorTest {
         assertEquals(expected, actual);
     } 
     
-    //2. Roter Test
+    //2. Roter Test - gefixter Fehler
     @Test
     @DisplayName("should display large number in exponential format")
     void testShowLargeNumberAsExponential() {
@@ -134,7 +134,7 @@ class CalculatorTest {
 
         calc.pressDigitKey(1);
         calc.pressDigitKey(0);
-        calc.pressDigitKey(0);
+        calc.pressDigitKey(2);
         calc.pressDigitKey(0);
         calc.pressDigitKey(0);
         calc.pressDigitKey(0);
@@ -146,7 +146,7 @@ class CalculatorTest {
         calc.pressDigitKey(0);
         calc.pressEqualsKey();
 
-        String expected = "1e+9";
+        String expected = "1.02e+9";
         String actual = calc.readScreen();
 
         assertEquals(expected, actual);

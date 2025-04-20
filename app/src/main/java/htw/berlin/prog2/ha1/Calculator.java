@@ -124,7 +124,8 @@ public class Calculator {
     public void pressNegativeKey() {
         screen = screen.startsWith("-") ? screen.substring(1) : "-" + screen;
     }
-
+    
+    //2. roter Test Fix: Wenn das Ergebnis positiv und im Exponentialformat ist, wird das Format an das des Online-Rechners angepasst
     /**
      * Empfängt den Befehl der gedrückten "="-Taste.
      * Wurde zuvor keine Operationstaste gedrückt, passiert nichts.
@@ -146,6 +147,7 @@ public class Calculator {
         if(screen.equals("Infinity")) screen = "Error";
         if(screen.endsWith(".0")) screen = screen.substring(0,screen.length()-2);
         if(screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
+        if(result >= 1e9 && result <= 1e100  ) screen = screen.replace("E", "e+");
     }
     
 }

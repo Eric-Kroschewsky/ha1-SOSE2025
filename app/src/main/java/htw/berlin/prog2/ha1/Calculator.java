@@ -20,7 +20,7 @@ public class Calculator {
     public String readScreen() {
         return screen;
     }
-
+       
     /**
      * Empfängt den Wert einer gedrückten Zifferntaste. Da man nur eine Taste auf einmal
      * drücken kann muss der Wert positiv und einstellig sein und zwischen 0 und 9 liegen.
@@ -49,7 +49,10 @@ public class Calculator {
         latestOperation = "";
         latestValue = 0.0;
     }
+    
 
+    //Fix für 1. roten Test: bei pressBinaryOperationKey wird unterschieden ob bereits eine Operation ausgeführt wurde
+    //oder nicht; wenn nicht: wie vorher - wenn ja: wird ein Zwischenergebnis berechnet und angezeigt
     /**
      * Empfängt den Wert einer gedrückten binären Operationstaste, also eine der vier Operationen
      * Addition, Substraktion, Division, oder Multiplikation, welche zwei Operanden benötigen.
@@ -60,8 +63,22 @@ public class Calculator {
      * @param operation "+" für Addition, "-" für Substraktion, "x" für Multiplikation, "/" für Division
      */
     public void pressBinaryOperationKey(String operation)  {
+        if(latestOperation == ""){
         latestValue = Double.parseDouble(screen);
         latestOperation = operation;
+    }else{
+        var resultPartial = switch(latestOperation) {
+            case "+" -> latestValue + Double.parseDouble(screen);
+            case "-" -> latestValue - Double.parseDouble(screen);
+            case "x" -> latestValue * Double.parseDouble(screen);
+            case "/" -> latestValue / Double.parseDouble(screen);
+            default -> throw new IllegalArgumentException();
+            
+        };
+        latestOperation = operation;
+        latestValue = resultPartial;
+        screen = Double.toString(resultPartial);
+    }
     }
 
     /**
@@ -130,4 +147,5 @@ public class Calculator {
         if(screen.endsWith(".0")) screen = screen.substring(0,screen.length()-2);
         if(screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
     }
+    
 }

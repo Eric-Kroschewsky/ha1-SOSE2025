@@ -87,8 +87,25 @@ class CalculatorTest {
 
         assertEquals(expected, actual);
     }
+    
+    //1. Grüner Test 
+    @Test
+    @DisplayName("should remove dot zero when displaying result")
+    void testRemoveDotZero() {
+        Calculator calc = new Calculator();
 
+        calc.pressDigitKey(1);
+        calc.pressDotKey();
+        calc.pressDigitKey(0);
+        calc.pressBinaryOperationKey("+");
+        calc.pressDigitKey(1);
+        calc.pressEqualsKey();
 
+        String expected = "2";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    } 
     //TODO hier weitere Tests erstellen
 }
 

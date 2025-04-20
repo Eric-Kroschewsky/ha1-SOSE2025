@@ -106,6 +106,25 @@ class CalculatorTest {
 
         assertEquals(expected, actual);
     } 
+
+    //1. Roter Test 
+    @Test
+    @DisplayName("should calculate correctly when using more than one binary operator")
+    void testSubtractTwice() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(6);
+        calc.pressBinaryOperationKey("-");
+        calc.pressDigitKey(6);
+        calc.pressBinaryOperationKey("-");
+        calc.pressDigitKey(6);
+        calc.pressEqualsKey();
+
+        String expected = "-6";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    } 
     //TODO hier weitere Tests erstellen
 }
 

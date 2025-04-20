@@ -107,7 +107,7 @@ class CalculatorTest {
         assertEquals(expected, actual);
     } 
 
-    //1. Roter Test 
+    //1. Roter Test - gefixter Fehler
     @Test
     @DisplayName("should calculate correctly when using more than one binary operator")
     void testSubtractTwice() {
@@ -125,6 +125,32 @@ class CalculatorTest {
 
         assertEquals(expected, actual);
     } 
-    //TODO hier weitere Tests erstellen
+    
+    //2. Roter Test
+    @Test
+    @DisplayName("should display large number in exponential format")
+    void testShowLargeNumberAsExponential() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(1);
+        calc.pressDigitKey(0);
+        calc.pressDigitKey(0);
+        calc.pressDigitKey(0);
+        calc.pressDigitKey(0);
+        calc.pressDigitKey(0);
+        calc.pressDigitKey(0);
+        calc.pressDigitKey(0);
+        calc.pressDigitKey(0);
+        calc.pressBinaryOperationKey("x");
+        calc.pressDigitKey(1);
+        calc.pressDigitKey(0);
+        calc.pressEqualsKey();
+
+        String expected = "1e+9";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    } 
+
 }
 
